@@ -62,6 +62,9 @@ end
 
 gem 'acts-as-taggable-on', '~> 6.0'
 gem "aws-sdk-s3", require: false
+gem 'capistrano-rails', '~> 1.4'
+gem 'capistrano-rvm'
+gem 'capistrano3-puma', github: "seuros/capistrano-puma"
 gem 'devise_token_auth'
 gem 'fast_jsonapi'
 gem 'friendly_id', '~> 5.2.4'
