@@ -261,6 +261,8 @@ GEM
     sshkit (1.21.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    textacular (5.2.0)
+      activerecord (>= 5.0, < 6.1)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -309,6 +311,7 @@ DEPENDENCIES
   shoulda-matchers
   spring
   spring-watcher-listen (~> 2.0.0)
+  textacular (~> 5.0)
   web-console (>= 3.3.0)
 
 RUBY VERSION
