@@ -7,6 +7,16 @@ module Api::V1
     respond_to :json, :xml
     before_action :authenticate_user!, only: [:create, :destroy, :update]
 
+    def create
+      @record = Record.new(record_params)
+      if @record.save
+        render json: RecordSerializer.new(@records, include: [:blog]).serialized_json, status: 200
+      else
+        Rails.logger.error @record.errors.inspect
+        render json: { error: @record.errors.inspect }, status: 422
+      end
+    end
+    
     def index
       if current_user
         @records = apply_scopes(Record.all.order(published_at: :desc)).page(params[:page]).per(50)
@@ -56,7 +66,7 @@ module Api::V1
     protected
 
     def record_params
-      params.require(:record).permit(:display_name, :published, :published_at, :tag_list, :review)
+      params.require(:record).permit(:display_name, :blog_id, :published, :published_at, :tag_list, :review)
     end
     
   end

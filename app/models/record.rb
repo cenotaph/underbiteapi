@@ -10,7 +10,7 @@ class Record < ApplicationRecord
   has_one_base64_attached :image
 
   validate :acceptable_image
-  validates :title, presence: true
+  validates :display_name, presence: true
   validates :display_name, presence: true, uniqueness: { scope: :blog_id }
   validates :blog, presence: true
 
