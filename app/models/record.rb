@@ -28,7 +28,7 @@ class Record < ApplicationRecord
   end
 
   def related
-    [ artists.map(&:records).flatten.delete_if{|x| x == self }.map{|x| [x.blog.slug, x.slug, x.image.url, x.display_name ].flatten }, labels.map(&:records).flatten.delete_if{|x| x == self }.map{|x| [x.blog.slug, x.slug, x.image.url, x.display_name ].flatten} ].flatten(1).uniq.compact
+    [ artists.map(&:records).flatten.delete_if{|x| x == self }.map{|x| [x.blog.slug, x.slug, x.image.url, x.display_name ].flatten }, labels.map(&:records).flatten.delete_if{|x| x == self }.map{|x| [x.blog.slug, x.slug, x.image.url, x.display_name ].flatten} ].flatten(1).uniq.compact.delete_if{|x| x.published != true }
   end
   
 
