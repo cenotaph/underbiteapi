@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_151816) do
+ActiveRecord::Schema.define(version: 2020_07_13_190758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_151816) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+    t.text "description"
     t.index ["slug"], name: "index_blogs_on_slug", unique: true
   end
 
@@ -89,7 +90,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_151816) do
     t.index ["slug"], name: "index_records_on_slug", unique: true
   end
 
-  create_table "taggings", id: :integer, default: nil, force: :cascade do |t|
+  create_table "taggings", id: :integer, default: -> { "nextval('taggings_seq'::regclass)" }, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
     t.integer "taggable_id"

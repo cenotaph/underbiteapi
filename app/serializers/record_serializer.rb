@@ -4,6 +4,7 @@ class RecordSerializer
   attribute :blog_id do |obj|
     obj.blog.slug
   end
+  belongs_to :blog
   attributes :artists do |obj|
     obj.artists
   end

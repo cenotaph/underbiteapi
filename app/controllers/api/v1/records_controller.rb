@@ -10,7 +10,7 @@ module Api::V1
     def index
       if current_user
         @records = apply_scopes(Record.all.order(published_at: :desc)).page(params[:page]).per(50)
-        render json: RecordSerializer.new(@records).serialized_json, status: 200
+        render json: RecordSerializer.new(@records, include: [:blog]).serialized_json, status: 200
       else
         if params[:blog_id]
           @blog = Blog.friendly.find(params[:blog_id])
@@ -20,7 +20,7 @@ module Api::V1
         end
         respond_to do |format|
           format.rss { render layout: false }
-          format.json { render json: RecordSerializer.new(@records).serialized_json, status: 200 }
+          format.json { render json: RecordSerializer.new(@records, include: [:blog]).serialized_json, status: 200 }
         end
       end
     end
@@ -33,10 +33,10 @@ module Api::V1
         @record = Record.friendly.find(params[:id])
       end
       if current_user
-        render json: RecordSerializer.new(@record).serialized_json, status: 200
+        render json: RecordSerializer.new(@record, include: [:blog]).serialized_json, status: 200
       else
         if @record.published
-          render json: RecordSerializer.new(@record).serialized_json, status: 200
+          render json: RecordSerializer.new(@record, include: [:blog]).serialized_json, status: 200
         else
           render json: { error: 'Not published yet' }, status: 404
         end
@@ -47,7 +47,7 @@ module Api::V1
       @record = Record.friendly.find(params[:id])
       if @record.update(record_params)
         @record.image.attach(data: params[:record][:image])
-        render json: RecordSerializer.new(@record).serialized_json, status: 200
+        render json: RecordSerializer.new(@record, include: [:blog]).serialized_json, status: 200
       else
         render json: { error: @record.errors.inspect.join }, status: 422
       end
