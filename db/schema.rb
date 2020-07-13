@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_19_080942) do
+ActiveRecord::Schema.define(version: 2020_07_12_151816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_080942) do
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", null: false
+    t.string "service_name"
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -88,7 +89,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_080942) do
     t.index ["slug"], name: "index_records_on_slug", unique: true
   end
 
-  create_table "taggings", id: :serial, force: :cascade do |t|
+  create_table "taggings", id: :integer, default: nil, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
     t.integer "taggable_id"
@@ -107,12 +108,37 @@ ActiveRecord::Schema.define(version: 2020_06_19_080942) do
     t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
   end
 
-  create_table "tags", id: :serial, force: :cascade do |t|
+  create_table "tags", id: :integer, default: nil, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "provider", default: "email", null: false
+    t.string "uid", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.boolean "allow_password_change", default: false
+    t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.string "name"
+    t.string "nickname"
+    t.string "image"
+    t.string "email"
+    t.json "tokens"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

@@ -91,4 +91,3 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 config/deploy/*
-Capfile

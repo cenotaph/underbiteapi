@@ -7,7 +7,7 @@ namespace :blogger do
   task tags: [:environment] do
     xmlfile = '/Users/fail/fetched/blog.xml'
     xmldoc = REXML::Document.new(File.new(xmlfile))
-    blog = Blog.find_or_create_by(name: 'Dislocated Underbite Spinal Alphabetised Encourager Templates', slug: 'lps')
+    blog = Blog.friendly.find('7s')
     i= -1
     xmldoc.elements.each('feed/entry') do |e|
       i = i+1
@@ -35,7 +35,7 @@ namespace :blogger do
   task import: [:environment] do
     xmlfile = '/Users/fail/fetched/blog.xml'
     xmldoc = REXML::Document.new(File.new(xmlfile))
-    blog = Blog.find_or_create_by(name: 'Dislocated Underbite Spinal Alphabetised Encourager Templates', slug: 'lps')
+    blog = Blog.friendly.find('7s')
     root = xmldoc.root
     i = -1
     xmldoc.elements.each('feed/entry') do |e|
