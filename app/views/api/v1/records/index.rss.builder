@@ -14,8 +14,8 @@ xml.rss :version => "2.0" do
         xml.title post.display_name
         xml.description post.review, type: :html
         xml.pubDate post.published_at.to_s(:rfc822)
-        xml.link v1_records_url(post)
-        xml.guid v1_records_url(post)
+        xml.link 'https://vinylunderbite.com/' + post.blog.slug + '/' + post.slug
+        xml.guid 'https://vinylunderbite.com/' + post.blog.slug + '/' + post.slug
 
       end
     end
