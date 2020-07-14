@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe "Records", type: :request do
 
   describe "request records by tag" do
@@ -9,7 +11,7 @@ RSpec.describe "Records", type: :request do
         rec.tag_list.add('fuckery')
         rec.save
       end
-      get v1_blog_records_path(blog_id: 'lps', by_tag: 'fuckery')
+      get v1_blog_records_path(blog_id: 'lps', by_tag: 'fuckery', format: :js)
     end
 
     it 'returns http success' do

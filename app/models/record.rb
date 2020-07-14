@@ -10,13 +10,13 @@ class Record < ApplicationRecord
   has_one_base64_attached :image
 
   validate :acceptable_image
-  validates :display_name, presence: true
+  validates :title, presence: true
   validates :display_name, presence: true, uniqueness: { scope: :blog_id }
   validates :blog, presence: true
 
   before_save :set_published_at
 
-  scope :published,  ->() { where(published: true) }
+  scope :published,  ->() { where(published: true).where(['published_at <= ?', Time.current.utc]) }
   scope :by_tag, -> (tag) { tagged_with(tag) }
 
   def acceptable_image

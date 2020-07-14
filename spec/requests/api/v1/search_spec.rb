@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe "Searching", type: :request do
 
   describe "search records by a term" do
