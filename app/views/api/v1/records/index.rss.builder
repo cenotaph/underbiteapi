@@ -7,13 +7,12 @@ xml.rss :version => "2.0" do
 
     for post in @records
       xml.item do
-        withimg = ''
         unless post.image.filename.nil?
-          withimg += image_tag post.image.url 
+          xml.media(:content, url: post.image.url)
+          xml.media(:thumbnail, url:  post.image.url)
         end
-        withimg += '<br />' + post.review
         xml.title post.display_name
-        xml.description withimg, type: :html
+        xml.description post.review, type: :html
         xml.pubDate post.published_at.to_s(:rfc822)
         xml.link v1_records_url(post)
         xml.guid v1_records_url(post)
