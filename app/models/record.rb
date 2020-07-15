@@ -8,6 +8,8 @@ class Record < ApplicationRecord
   has_and_belongs_to_many :labels
   has_and_belongs_to_many :artists
   has_one_base64_attached :image
+  accepts_nested_attributes_for :artists, reject_if: ->(attributes){ attributes['slug'].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :labels, reject_if: ->(attributes){ attributes['slug'].blank? }, allow_destroy: true
 
   validate :acceptable_image
   validates :title, presence: true
@@ -25,6 +27,19 @@ class Record < ApplicationRecord
     unless acceptable_types.include?(image.content_type)
       errors.add(:image, "must be a JPEG or PNG")
     end
+  end
+
+  def artists_attributes=(attributes)
+    artist_ids = attributes.map{|a| a[:id] }.compact 
+    artists << Artist.find(artist_ids)
+    super attributes
+  end
+
+
+  def labels_attributes=(attributes)
+    label_ids = attributes.map{|a| a[:id] }.compact 
+    labels << Label.find(label_ids)
+    super attributes
   end
 
   def related

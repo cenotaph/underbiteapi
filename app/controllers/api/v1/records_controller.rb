@@ -10,7 +10,7 @@ module Api::V1
     def create
       @record = Record.new(record_params)
       if @record.save
-        render json: RecordSerializer.new(@records, include: [:blog]).serialized_json, status: 200
+        render json: RecordSerializer.new(@record, include: [:blog]).serialized_json, status: 200
       else
         Rails.logger.error @record.errors.inspect
         render json: { error: @record.errors.inspect }, status: 422
@@ -66,7 +66,7 @@ module Api::V1
     protected
 
     def record_params
-      params.require(:record).permit(:display_name, :blog_id, :published, :published_at, :tag_list, :review)
+      params.require(:record).permit(:display_name, :blog_id, :title, :image, :published, :published_at, :tag_list, :review, artist_ids: [], label_ids: [], artists_attributes: [:id, :_destroy], labels_attributes: [:id, :_destroy])
     end
     
   end
