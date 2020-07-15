@@ -10,6 +10,7 @@ module Api::V1
     def create
       @record = Record.new(record_params)
       if @record.save
+        @record.image.attach(data: params[:record][:image])
         render json: RecordSerializer.new(@record, include: [:blog]).serialized_json, status: 200
       else
         Rails.logger.error @record.errors.inspect
