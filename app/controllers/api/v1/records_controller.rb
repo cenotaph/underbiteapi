@@ -68,7 +68,7 @@ module Api::V1
         @record.image.attach(data: params[:record][:image])
         render json: RecordSerializer.new(@record, include: [:blog]).serialized_json, status: 200
       else
-        render json: { error: @record.errors.inspect.join }, status: 422
+        render json: { error: @record.errors.inspect }, status: 422
       end
     end
     
