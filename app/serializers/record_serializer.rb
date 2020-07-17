@@ -1,9 +1,9 @@
 class RecordSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :display_name, :review, :tag_list, :published, :published_at, :slug
+  attributes :display_name, :review,  :title, :blog_id, :tag_list, :published, :published_at, :slug
   has_many :artists
   has_many :labels
-  attribute :blog_id do |obj|
+  attribute :blog_slug do |obj|
     obj.blog.slug
   end
   belongs_to :blog
