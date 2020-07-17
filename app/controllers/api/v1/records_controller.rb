@@ -75,7 +75,7 @@ module Api::V1
     protected
 
     def record_params
-      params.require(:record).permit(:display_name, :blog_id, :title,  :published, :published_at, :tag_list, :review, artist_ids: [], label_ids: [], artists_attributes: [:id, :_destroy], labels_attributes: [:id, :_destroy])
+      params.permit(:display_name, :blog_id, :title,  :published, :published_at, :tag_list, :review, artist_ids: [], label_ids: [], artists_attributes: [:id, :_destroy], labels_attributes: [:id, :_destroy])
     end
     
   end
