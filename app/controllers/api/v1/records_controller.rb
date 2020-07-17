@@ -65,7 +65,7 @@ module Api::V1
     def update
       @record = Record.friendly.find(params[:id])
       if @record.update(record_params)
-        @record.image.attach(data: params[:image]) if params[:image]
+        @record.image.attach(data: params[:image]) if params[:image] !~ /^http/
         render json: RecordSerializer.new(@record, include: [:blog]).serialized_json, status: 200
       else
         Rails.logger.error @record.errors.inspect
