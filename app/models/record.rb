@@ -20,6 +20,8 @@ class Record < ApplicationRecord
 
   scope :published,  ->() { where(published: true).where(['published_at <= ?', Time.current.utc]) }
   scope :by_tag, -> (tag) { tagged_with(tag) }
+  scope :by_artist, -> (artist_id) { joins(:artists).where(["artists.slug = ?", artist_id]).where(published: true) }
+  scope :by_label, -> (label_id) { joins(:labels).where(["labels.slug = ?", label_id]).where(published: true) }
 
   def acceptable_image
     return unless image.attached?

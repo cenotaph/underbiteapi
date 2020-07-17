@@ -7,7 +7,11 @@ Rails.application.routes.draw do
         resources :records, defaults: { format: :json }
       end
       resources :labels
-      resources :records
+      resources :records do
+        collection do
+          get :calendar
+        end
+      end
       resources :tags
       post '/search', to: 'search#index'
     end

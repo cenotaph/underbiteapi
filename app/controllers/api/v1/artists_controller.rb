@@ -17,6 +17,12 @@ module Api::V1
       render json: ArtistSerializer.new(@artists).serialized_json, status: 200
     end
 
+    def show
+      @artist = Artist.friendly.find(params[:id])
+      render json: ArtistSerializer.new(@artist).serialized_json, status: 200
+    end
+    
+
     protected
 
     def artist_params

@@ -4,9 +4,17 @@ module Api::V1
   # device types controller. admins only?
   class RecordsController < ApiController
     has_scope :by_tag
+    has_scope :by_artist
+    has_scope :by_label
     respond_to :json, :xml
     before_action :authenticate_user!, only: [:create, :destroy, :update]
 
+    def calendar
+      @records = Record.published.group_by{|x| [x.published_at.year, x.published_at.
+        month] }.sort_by(&:first).reverse.to_json
+      render json: @records, status: 200
+    end
+    
     def create
       @record = Record.new(record_params)
       if @record.save
@@ -44,10 +52,10 @@ module Api::V1
         @record = Record.friendly.find(params[:id])
       end
       if current_user
-        render json: RecordSerializer.new(@record, include: [:blog]).serialized_json, status: 200
+        render json: RecordSerializer.new(@record, include: [:blog, :artists, :labels]).serialized_json, status: 200
       else
         if @record.published
-          render json: RecordSerializer.new(@record, include: [:blog]).serialized_json, status: 200
+          render json: RecordSerializer.new(@record, include: [:blog, :artists, :labels]).serialized_json, status: 200
         else
           render json: { error: 'Not published yet' }, status: 404
         end

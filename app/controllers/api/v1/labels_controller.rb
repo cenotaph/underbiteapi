@@ -18,6 +18,12 @@ module Api::V1
       render json: LabelSerializer.new(@labels).serialized_json, status: 200
     end
 
+    def show
+      @label = Label.friendly.find(params[:id])
+      render json: LabelSerializer.new(@label).serialized_json, status: 200
+    end
+    
+
     protected
 
     def label_params
