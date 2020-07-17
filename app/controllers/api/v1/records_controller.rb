@@ -28,7 +28,12 @@ module Api::V1
     
     def index
       if current_user
-        @records = apply_scopes(Record.all.order(published_at: :desc)).page(params[:page]).per(50)
+        if params[:blog_id]
+          @blog = Blog.friendly.find(params[:blog_id])
+          @records = apply_scopes(@blog.records.published.order(published_at: :desc)).page(params[:page]).per(20)
+        else
+          @records = apply_scopes(Record.all.order(published_at: :desc)).page(params[:page]).per(20)
+        end
         render json: RecordSerializer.new(@records, include: [:blog]).serialized_json, status: 200
       else
         if params[:blog_id]

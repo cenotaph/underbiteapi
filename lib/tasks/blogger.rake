@@ -15,7 +15,8 @@ namespace :blogger do
       next if e.elements['id'].text !~ /\.post\-/
       next if e.elements['title'].text =~ /^Template:/
       review = e.elements['content'].text
-      existing = Record.find_by(review: review)
+      # puts e.elements['title'].text
+      existing = Record.find_by(display_name: e.elements['title'].text)
       if existing.nil?
         puts 'Cannot find ' + e.elements['title'].text
 
