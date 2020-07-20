@@ -3,7 +3,7 @@
 module Api::V1
   # device types controller. admins only?
   class LabelsController < ApiController
-    before_action :authenticate_user!
+    before_action :authenticate_user!, only: :create
 
     def create
       @label = Label.new(label_params)

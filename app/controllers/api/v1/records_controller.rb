@@ -43,8 +43,9 @@ module Api::V1
           @records = apply_scopes(Record.published.order(published_at: :desc)).page(params[:page]).per(20)
         end
         respond_to do |format|
-          format.rss { render layout: false }
           format.json { render json: RecordSerializer.new(@records, include: [:blog]).serialized_json, status: 200 }
+          format.rss { render layout: false }
+          
         end
       end
     end

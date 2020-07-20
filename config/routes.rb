@@ -7,7 +7,7 @@ Rails.application.routes.draw do
         resources :records, defaults: { format: :json }
       end
       resources :labels
-      resources :records do
+      resources :records, defaults: {format: 'json'}  do
         collection do
           get :calendar
         end
