@@ -13,7 +13,12 @@ xml.rss :version => "2.0", "xmlns:atom" => "http://www.w3.org/2005/Atom" do
           xml.media(:thumbnail, url:  post.image.url, "xmlns:media" => "http://search.yahoo.com/mrss/")
         end
         xml.title post.display_name
-        xml.description(h(post.review))
+        desc = ''
+        unless post.image.filename.nil?
+          desc = '<img src="' +  post.image.url + '" /><br />'
+        end
+        desc += post.review
+        xml.description desc, type: :html
         xml.pubDate post.published_at.to_s(:rfc822)
         xml.link 'https://vinylunderbite.com/' + post.blog.slug + '/' + post.slug
         xml.guid 'https://vinylunderbite.com/' + post.blog.slug + '/' + post.slug
