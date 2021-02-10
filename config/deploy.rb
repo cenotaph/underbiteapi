@@ -1,10 +1,10 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.14.1"
+lock "~> 3.15.0"
 
 set :application, "underbiteapi"
 set :repo_url, "git@github.com:cenotaph/underbiteapi.git"
 set :branch, ENV['BRANCH'] if ENV['BRANCH']
-set :rvm_ruby_version, '2.7.1'
+set :rvm_ruby_version, '2.7.2'
 set :keep_releases, 2
 set :linked_files, %w{config/database.yml  config/master.key  config/puma.rb }
 set :linked_dirs, %w{ log shared tmp}
@@ -20,6 +20,8 @@ set :puma_error_log,  "#{release_path}/log/puma.access.log"
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
+set :puma_service_unit_name, "puma_#{fetch(:application)}_#{fetch(:stage)}"
+
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
   task :make_dirs do
@@ -46,20 +48,20 @@ namespace :deploy do
     end
   end
 
-  desc 'Initial Deploy'
-  task :initial do
-    on roles(:app) do
-      before 'deploy:restart', 'puma:start'
-      invoke 'deploy'
-    end
-  end
+  # desc 'Initial Deploy'
+  # task :initial do
+  #   on roles(:app) do
+  #     before 'deploy:restart', 'puma:start'
+  #     invoke 'deploy'
+  #   end
+  # end
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:start'
-    end
-  end
+  # desc 'Restart application'
+  # task :restart do
+  #   on roles(:app), in: :sequence, wait: 5 do
+  #     invoke 'puma:start'
+  #   end
+  # end
 
 
   before :starting,     :check_revision
