@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '2.7.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 # gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
-gem 'rails', github: 'rails/rails', branch: :main, ref: 'cf1881237a3b40c6232cb321bed4f03ccc897cf5'
+gem 'rails', '6.1.4.1' #, github: 'rails/rails', branch: :main, ref: 'cf1881237a3b40c6232cb321bed4f03ccc897cf5'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -61,7 +61,7 @@ end
 
 
 
-gem 'acts-as-taggable-on', '~> 6.0'
+gem 'acts-as-taggable-on', '~> 7.0'
 gem 'active_storage_base64'
 gem "aws-sdk-s3", require: false
 gem 'capistrano-rails', '~> 1.4'
