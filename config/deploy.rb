@@ -1,10 +1,10 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.15.0"
+lock "~> 3.16.0"
 
 set :application, "underbiteapi"
 set :repo_url, "git@github.com:cenotaph/underbiteapi.git"
 set :branch, ENV['BRANCH'] if ENV['BRANCH']
-set :rvm_ruby_version, '2.7.2'
+set :rvm_ruby_version, '2.7.4'
 set :keep_releases, 2
 set :linked_files, %w{config/database.yml  config/master.key  config/puma.rb }
 set :linked_dirs, %w{ log shared tmp}

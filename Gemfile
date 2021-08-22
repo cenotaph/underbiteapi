@@ -76,3 +76,8 @@ gem 'nokogiri'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rexml'
 gem 'textacular', '~> 5.0'
+
+
+#  for ssh deploy
+gem 'ed25519'
+gem 'bcrypt_pbkdf'
