@@ -92,3 +92,5 @@ yarn-debug.log*
 !/storage/.keep
 config/deploy/*
 config/database.yml
+/config/credentials/production.key
+.DS_Store
