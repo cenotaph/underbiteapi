@@ -63,11 +63,11 @@ end
 gem 'active_storage_base64'
 gem 'acts-as-taggable-on' # , '~> 7.0'
 gem 'aws-sdk-s3', require: false
-gem 'capistrano' # , '3.10.1'
+gem 'capistrano' #, '3.10.1'
 gem 'capistrano3-nginx', '~> 3.0.4'
-gem 'capistrano3-puma', github: 'seuros/capistrano-puma'
-gem 'capistrano-bundler' # , '1.1.4'
-gem 'capistrano-rails' # , '1.1.3'
+gem 'capistrano3-puma', github: "seuros/capistrano-puma"
+gem 'capistrano-bundler' #, '1.1.4'
+gem 'capistrano-rails' #, '1.1.3'
 gem 'capistrano-rvm'
 gem 'devise_token_auth', '>= 1.2.0', git: 'https://github.com/lynndylanhurley/devise_token_auth'
 gem 'fast_jsonapi'
