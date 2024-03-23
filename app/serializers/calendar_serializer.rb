@@ -1,6 +1,6 @@
 class CalendarSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id 
+  attributes :id
   attribute :year do |obj|
     obj.first.first
   end

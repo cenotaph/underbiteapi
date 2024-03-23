@@ -11,5 +11,4 @@ RSpec.describe Artist, type: :model do
     r = FactoryBot.create(:artist)
     expect(r.alphabetical_name).to eq r.name
   end
-
 end

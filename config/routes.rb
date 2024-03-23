@@ -7,7 +7,7 @@ Rails.application.routes.draw do
         resources :records, defaults: { format: :json }
       end
       resources :labels
-      resources :records, defaults: {format: 'json'}  do
+      resources :records, defaults: { format: 'json' } do
         collection do
           get :calendar
         end
@@ -15,5 +15,5 @@ Rails.application.routes.draw do
       resources :tags
       post '/search', to: 'search#index'
     end
-  end 
+  end
 end

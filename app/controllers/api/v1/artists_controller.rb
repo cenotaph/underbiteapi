@@ -7,13 +7,13 @@ module Api::V1
 
     def create
       @artist = Artist.new(artist_params)
-      if @artist.save
-        render json: ArtistSerializer.new(@artist).serialized_json, status: 201
-      end
+      return unless @artist.save
+
+      render json: ArtistSerializer.new(@artist).serialized_json, status: 201
     end
-    
+
     def index
-      @artists = Artist.all.order("lower(alphabetical_name)")
+      @artists = Artist.all.order('lower(alphabetical_name)')
       render json: ArtistSerializer.new(@artists).serialized_json, status: 200
     end
 
@@ -21,14 +21,11 @@ module Api::V1
       @artist = Artist.friendly.find(params[:id])
       render json: ArtistSerializer.new(@artist).serialized_json, status: 200
     end
-    
 
     protected
 
     def artist_params
       params.permit(:name, :alphabetical_name)
     end
-    
   end
 end
-    

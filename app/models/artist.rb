@@ -7,10 +7,8 @@ class Artist < ApplicationRecord
   has_and_belongs_to_many :records
 
   def fill_alphabetical
-    if self.alphabetical_name.blank?
-      self.alphabetical_name ||= self.name
-    end
-    
+    return unless alphabetical_name.blank?
+
+    self.alphabetical_name ||= name
   end
-  
 end

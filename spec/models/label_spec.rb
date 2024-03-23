@@ -5,6 +5,4 @@ RSpec.describe Label, type: :model do
     subject { build(:label) }
     it { should validate_presence_of(:name) }
   end
-
-
 end

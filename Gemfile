@@ -7,7 +7,7 @@ ruby '3.3.0'
 # gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 gem 'rails', '7.1.3.2'
 # Use postgresql as the database for Active Record
-gem 'pg' #, '>= 0.18', '< 2.0'
+gem 'pg' # , '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 6'
 # Use SCSS for stylesheets
@@ -33,8 +33,9 @@ group :development, :test do
 end
 
 group :development do
+  gem 'bullet'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'listen' #, '>= 3.0.5', '< 3.2'
+  gem 'listen' # , '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -60,17 +61,17 @@ end
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'active_storage_base64'
-gem 'acts-as-taggable-on' #, '~> 7.0'
-gem "aws-sdk-s3", require: false
-gem 'capistrano' #, '3.10.1'
+gem 'acts-as-taggable-on' # , '~> 7.0'
+gem 'aws-sdk-s3', require: false
+gem 'capistrano' # , '3.10.1'
 gem 'capistrano3-nginx', '~> 3.0.4'
-gem 'capistrano3-puma', github: "seuros/capistrano-puma"
-gem 'capistrano-bundler' #, '1.1.4'
-gem 'capistrano-rails' #, '1.1.3'
+gem 'capistrano3-puma', github: 'seuros/capistrano-puma'
+gem 'capistrano-bundler' # , '1.1.4'
+gem 'capistrano-rails' # , '1.1.3'
 gem 'capistrano-rvm'
-gem 'devise_token_auth', '>= 1.2.0', git: "https://github.com/lynndylanhurley/devise_token_auth"
+gem 'devise_token_auth', '>= 1.2.0', git: 'https://github.com/lynndylanhurley/devise_token_auth'
 gem 'fast_jsonapi'
-gem 'friendly_id' #, '~> 5.2.4'
+gem 'friendly_id' # , '~> 5.2.4'
 gem 'has_scope'
 gem 'kaminari'
 gem 'nokogiri'
