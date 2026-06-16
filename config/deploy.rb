@@ -3,7 +3,7 @@ lock '~> 3.18.0'
 
 set :application, 'underbiteapi'
 set :repo_url, 'git@github.com:cenotaph/underbiteapi.git'
-set :branch, ENV['BRANCH'] if ENV['BRANCH']
+set :branch, ENV['BRANCH'] || 'main'
 set :rvm_ruby_version, 'ruby-4.0.4'
 set :keep_releases, 2
 set :linked_files, %w[config/database.yml config/master.key]
@@ -38,8 +38,8 @@ namespace :deploy do
   desc 'Make sure local git is in sync with remote.'
   task :check_revision do
     on roles(:app) do
-      unless %x(git rev-parse HEAD) == %x(git rev-parse origin/master)
-        puts 'WARNING: HEAD is not the same as origin/master'
+      unless `git rev-parse HEAD) == %x(git rev-parse origin/#{fetch(:branch)}`
+        puts "WARNING: HEAD is not the same as origin/#{fetch(:branch)}"
         puts 'Run `git push` to sync changes.'
         exit
       end
