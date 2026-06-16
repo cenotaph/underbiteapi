@@ -34,7 +34,7 @@ module Api::V1
           @blog = Blog.friendly.find(params[:blog_id])
           @records = apply_scopes(@blog.records.published.order(published_at: :desc)).page(params[:page]).per(10)
         else
-          @records = apply_scopes(Record.all.order(published_at: :desc)).page(params[:page]).per(10)
+          @records = apply_scopes(Record.includes([:artists, :labels]).order(published_at: :desc)).page(params[:page]).per(10)
         end
         render(json: RecordSerializer.new(@records, include: [:blog]).serialized_json, status: :ok)
       else
@@ -42,7 +42,7 @@ module Api::V1
           @blog = Blog.friendly.find(params[:blog_id])
           @records = apply_scopes(@blog.records.published.order(published_at: :desc)).page(params[:page]).per(10)
         else
-          @records = apply_scopes(Record.published.order(published_at: :desc)).page(params[:page]).per(10)
+          @records = apply_scopes(Record.published.includes([:artists, :labels, :image_attachment, :taggings]).order(published_at: :desc)).page(params[:page]).per(10)
         end
         respond_to do |format|
           format.json { render(json: RecordSerializer.new(@records, include: [:blog]).serialized_json, status: :ok) }

@@ -12,7 +12,11 @@ Rails.application.routes.draw do
           get :calendar
         end
       end
-      resources :tags
+      resources :tags, defaults: { format: 'json' } do
+        collection do
+          get :random
+        end
+      end
       post '/search', to: 'search#index'
     end
   end
