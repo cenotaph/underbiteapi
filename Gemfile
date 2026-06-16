@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.3.0'
+ruby '4.0.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 # gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
@@ -63,22 +63,26 @@ end
 gem 'active_storage_base64'
 gem 'acts-as-taggable-on' # , '~> 7.0'
 gem 'aws-sdk-s3', require: false
+gem 'benchmark'
 gem 'capistrano' #, '3.10.1'
 gem 'capistrano3-nginx', '~> 3.0.4'
 gem 'capistrano3-puma', github: "seuros/capistrano-puma"
 gem 'capistrano-bundler' #, '1.1.4'
 gem 'capistrano-rails' #, '1.1.3'
 gem 'capistrano-rvm'
+gem 'cgi'
 gem 'devise_token_auth', '>= 1.2.0', git: 'https://github.com/lynndylanhurley/devise_token_auth'
 gem 'fast_jsonapi'
 gem 'friendly_id' # , '~> 5.2.4'
 gem 'has_scope'
 gem 'kaminari'
+gem 'logger'
 gem 'nokogiri'
+gem 'ostruct'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rexml'
 gem 'textacular', '~> 5.0'
-
+gem 'tsort'
 #  for ssh deploy
 gem 'bcrypt_pbkdf'
 gem 'ed25519'
