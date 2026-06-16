@@ -4,7 +4,7 @@ lock '~> 3.18.0'
 set :application, 'underbiteapi'
 set :repo_url, 'git@github.com:cenotaph/underbiteapi.git'
 set :branch, ENV['BRANCH'] if ENV['BRANCH']
-set :rvm_ruby_version, '4.0.4'
+set :rvm_ruby_version, 'ruby-4.0.4'
 set :keep_releases, 2
 set :linked_files, %w[config/database.yml config/master.key]
 set :linked_dirs, %w[log shared tmp]
