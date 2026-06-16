@@ -17,7 +17,7 @@ xml.rss :version => '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom' do
         desc = '<img src="' + post.image.url + '" /><br />' unless post.image.filename.nil?
         desc += post.review
         xml.description desc, type: :html
-        xml.pubDate post.published_at.to_s(:rfc822)
+        xml.pubDate post.published_at.rfc822
         xml.link 'https://vinylunderbite.com/' + post.blog.slug + '/' + post.slug
         xml.guid 'https://vinylunderbite.com/' + post.blog.slug + '/' + post.slug
       end

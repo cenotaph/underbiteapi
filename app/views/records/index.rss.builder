@@ -12,7 +12,7 @@ xml.rss version: '2.0' do
         withimg += post.review
         xml.title post.display_name
         xml.description withimg, type: :html
-        xml.pubDate post.published_at.to_s(:rfc822)
+        xml.pubDate post.published_at.rfc822
         xml.link v1_records_url(post)
         xml.guid v1_records_url(post)
       end
