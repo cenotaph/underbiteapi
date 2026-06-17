@@ -69,8 +69,14 @@ module Api::V1
 
     def update
       @record = Record.friendly.find(params[:id])
+      if record_params[:remove_image] && @record.image
+        @record.image.purge
+      end
+
       if @record.update(record_params)
-        @record.image.attach(data: params[:image]) if params[:image] !~ /^http/
+        if params[:image] && params[:image] !~ /^http/
+            @record.image.attach(data: params[:image])   
+        end
         render(json: RecordSerializer.new(@record, include: [:blog]).serialized_json, status: :ok)
       else
         Rails.logger.error(@record.errors.inspect)
@@ -80,8 +86,9 @@ module Api::V1
 
     protected
 
+ 
     def record_params
-      params.permit(:display_name, :blog_id, :title, :published, :published_at, :tag_list, :review, artist_ids: [],
+      params.permit(:display_name, :blog_id,  :remove_image, :title, :published, :published_at, :tag_list, :review, artist_ids: [],
                                                                                                     label_ids: [], artists_attributes: %i[id _destroy], labels_attributes: %i[id _destroy])
     end
   end
