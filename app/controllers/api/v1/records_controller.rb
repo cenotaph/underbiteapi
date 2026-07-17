@@ -10,7 +10,7 @@ module Api::V1
     before_action :authenticate_user!, only: %i[create destroy update]
 
     def calendar
-      @records = Record.published.group_by do |x|
+      @records = Record.published.order(published_at: :desc).group_by do |x|
         [x.published_at.year, x.published_at
                                .month]
       end.sort_by(&:first).reverse.to_json
